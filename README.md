@@ -41,7 +41,7 @@ Podes acessar aos ficheiros do projeto clicando [aqui]().
 
 ## Como utilizar o projeto
 - Clone o repositório para a sua máquina:
-git clone https://github.com/bcarvalheiro/ES-2023-2SEM-Terca-Feira-LEIPL-GrupoB.git
+git clone https://github.com/CarolinaVRoque/DIAM-Projeto-2022-23-Sneakers_Cards
 - Abra o projeto em um ambiente de desenvolvimento Java de sua escolha;
 - Compile o projeto;
 - Execute a aplicação;

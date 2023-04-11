@@ -53,4 +53,3 @@ git clone https://github.com/CarolinaVRoque/DIAM-Projeto-2022-23-Sneakers_Cards
 - Abra o projeto em um ambiente de desenvolvimento Java de sua escolha;
 - Compile o projeto;
 - Execute a aplicação;
-- Siga as instruções na tela para carregar, converter e visualizar o horário, criar horários para estudantes e visualizar aulas em sobreposição e sobrelotação.

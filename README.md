@@ -14,12 +14,20 @@ colecionadores selecionam até 5 cartas para mostrar aos outros utilizadores);
 - Administrador poderá adicionar novas cartas;
 - Sistema de crédito para compra de Boosters.
 
-# Informações adicionais:
+## Informações adicionais:
 - Limite de post de trocas de cartas semanais;
 - Plataforma irá gerir automáticamente os Boosters com x cartas.
 
+## :technologist:	Django Models:
+- Users;
+- Colecionadores;
+- Cartas;
+- Baralhos (composto por cartas).
+
 ## 🎴 Tipo de cartas presentes na plataforma
-![Exemplo de uma carta disponivel no website.](https://user-images.githubusercontent.com/103536183/231151458-f938b9c2-eab4-47fe-b179-82475421c58e.png)![cards_final-37](https://user-images.githubusercontent.com/103536183/231158196-b2e63c8c-98e5-456a-bea3-e3dd539366b5.png)
+![image](https://user-images.githubusercontent.com/103536183/231160888-fccd0df9-bd29-4598-abdb-06d1d0f88c4c.png) ![image](https://user-images.githubusercontent.com/103536183/231160909-0d0daf83-100e-4f1f-8ce7-133593a42cfc.png)
+
+
 
 
 ## ✔️ Técnicas e tecnologias utilizadas:

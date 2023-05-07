@@ -1,0 +1,25 @@
+{% extends "SneakerCards/template.html" %}
+{% block content %}
+
+    <div class="containerForm">
+
+        <form class="register"  method="post" action="{% url 'SneakerCards:register' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+            <h1>Criar um novo utilizador</h1>
+            <fieldset>
+                <label for="avatar">ProfilePic:</label>
+                <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpg, image/jpeg, image/png"><br>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br>
+                <label for="full_name">Full name :</label><br>
+                <input type="text" id="full_name" name="full_name"><br>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email"><br>
+            </fieldset>
+                <input type="submit" value="Registar">
+                <input type="reset" value="Limpar dados">
+        </form>
+    </div>
+{% endblock content %}

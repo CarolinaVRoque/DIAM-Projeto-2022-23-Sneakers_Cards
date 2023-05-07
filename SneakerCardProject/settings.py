@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'SneakerCards.apps.SneakercardsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'SneakerCards',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+STATIC_URL = 'static/'
+MEDIA_URL = 'SneakerCards/static/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'SneakerCards/static/media/')
 
 
 # Static files (CSS, JavaScript, Images)

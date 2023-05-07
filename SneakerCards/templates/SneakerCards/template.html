@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SneakerCard Collectors Maven</title>
+        {% load static %}
+        {% block head %}
+        {% endblock head %}
+        <link rel="stylesheet" href="{% static 'SneakerCards/css/main.css' %}">
+    </head>
+
+    <div class="grid">
+        <header class="page-header">
+            <div class="content">
+                <p>Header</p>
+            </div>
+        </header>
+
+        <nav class="page-leftbar">
+          <form method="get" action="{% url 'SneakerCards:index' %}">
+            <button type="submit" class="menu-button">Home</button>
+          </form>
+          <form method="get" action="{% url 'SneakerCards:about' %}">
+            <button type="submit" class="menu-button">About</button>
+          </form>
+          <form method="get" action="{% url 'SneakerCards:register' %}">
+            <button type="submit" class="menu-button">Register</button>
+          </form>
+          <form method="get" action="{% url 'SneakerCards:login' %}">
+            <button type="submit" class="menu-button">Login</button>
+          </form>
+
+          <form method="get" action="{% url 'SneakerCards:add_cards' %}">
+            <button type="submit" class="menu-button">Add cards</button>
+          </form>
+
+          <form method="get" action="{% url 'SneakerCards:view_cards' %}">
+            <button type="submit" class="menu-button">SneakerDex</button>
+          </form>
+        </nav>
+
+        <main class="page-main">
+                {% block content %}
+                {% endblock %}
+        </main>
+
+        <footer class="page-footer">
+            <div class="content">
+                <p>Footer</p>
+            </div>
+        </footer>
+
+    </div>
+</html>
+
+
+
+

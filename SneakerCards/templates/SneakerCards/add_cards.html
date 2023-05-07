@@ -1,0 +1,41 @@
+{% extends "SneakerCards/template.html" %}
+{% block content %}
+    <div class="containerForm">
+        <form class="register"  method="post" action="{% url 'SneakerCards:add_cards' %}" enctype="multipart/form-data">
+        {% if sucess_message or error_message %}
+            {% if sucess_message %}
+                <p>{{ sucess_message }}</p>
+            {% else %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+        {% endif %}
+          {% csrf_token %}
+            <h1>Add new Card</h1>
+            <fieldset>
+                <label for="card_pic">Card Picture:</label>
+                <input type="file" id="card_pic" name="card_pic" accept="image/gif, image/jpg, image/jpeg, image/png"><br>
+
+                <label for="card_name">Card Name:</label><br>
+                <input type="text" id="card_name" name="card_name"><br>
+
+                <label for="card_descript">Card Description:</label><br>
+                <input type="text" id="card_descript" name="card_descript"><br>
+
+                <label for="card_type">Card Type:</label><br>
+
+                    <select name="card_type" id="card_type">
+                {%  if card_types %}
+                    {%  for card_type in card_types %}
+                            <option value="{{ card_type.id }}" > {{ card_type.type }} > {{ card_type.value }}</option>
+                        {%  endfor %}
+                    </select><br>
+                {%  else %}
+                            <option value="No cards"> No_Cards </option>
+                {%  endif %}
+            <br>
+            </fieldset>
+                <br><input type="submit" value="Registar">
+                <input type="reset" value="Limpar dados">
+        </form>
+    </div>
+{%  endblock content %}

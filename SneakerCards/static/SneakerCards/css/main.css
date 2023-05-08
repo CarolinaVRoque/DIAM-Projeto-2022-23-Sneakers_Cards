@@ -224,3 +224,11 @@ body{
 .register_box {
    background-color: rgba(120,120,120,0.8);
 }
+
+.login{
+  color: white;
+}
+
+.login_box{
+  background-color: rgba(120,120,120,0.8);
+}

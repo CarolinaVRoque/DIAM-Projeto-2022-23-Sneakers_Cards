@@ -1,4 +1,12 @@
 {% extends "SneakerCards/template.html" %}
 {% block content %}
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
     <h1>About</h1>
+    <fieldset>
+        No nosso site:
+        Utilizadores/Jogadores/Colecionadores: compram “Boosters” (conjunto de várias
+        cartas aleatórias) e podem mais tarde fazer posts a solicitar troca de cartas.
+    </fieldset>
 {% endblock content %}

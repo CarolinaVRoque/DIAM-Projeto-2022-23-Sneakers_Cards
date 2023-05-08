@@ -25,7 +25,10 @@ body{
 
 .page-header {
   grid-area: header;
-}
+  background-image: url("../images/banner.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  }
 
 .page-leftbar {
   grid-area: leftbar;
@@ -224,10 +227,6 @@ body{
    background-color: rgba(120,120,120,0.8);
 }
 
-.login{
-  color: white;
-}
-
-.login_box{
-  background-color: rgba(120,120,120,0.8);
+fieldset{
+    background-color: rgba(120,120,120,0.8);
 }

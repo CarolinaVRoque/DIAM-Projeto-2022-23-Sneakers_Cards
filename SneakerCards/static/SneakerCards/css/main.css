@@ -1,7 +1,6 @@
 {% load static %}
 
 
-
 body{
   background-image: url("../images/img.png");
 }
@@ -10,7 +9,7 @@ body{
 .grid {
   display: grid;
   grid-template-columns: 200px auto;
-  grid-template-rows: 70px minmax(160px, auto) auto;
+  grid-template-rows: 240px minmax(160px, auto) auto;
   grid-template-areas: 
     'header header'
     'leftbar main'
@@ -19,8 +18,6 @@ body{
   row-gap: 5px;
   padding-top: 5%;
   padding-left: 5%;
-
-
 }
 
 .page-header {
@@ -28,6 +25,8 @@ body{
   background-image: url("../images/banner.png");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+
   }
 
 .page-leftbar {
@@ -193,7 +192,6 @@ body{
   overflow-x: hidden;
   position: relative;
   transition: .5s;
-
 }
 
 .bi-chevron-double-right{

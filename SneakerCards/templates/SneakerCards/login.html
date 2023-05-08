@@ -3,16 +3,19 @@
     {%  if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {%  endif %}
+    <h1>Login</h1>
     <div class="containerForm">
         <form class="login"  method="post" action="{% url 'SneakerCards:login' %}">
             {% csrf_token %}
             <h1> Login </h1>
-            <fieldset>
+            <div class="login_box">
+                <fieldset>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username"><br>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password"><br>
             </fieldset>
+            </div>
             <input type="submit" value="Login">
         </form>
     </div>

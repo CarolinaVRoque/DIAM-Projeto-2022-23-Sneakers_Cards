@@ -1,4 +1,16 @@
 {% load static %}
+
+.grid_container{
+  height: 100vh;
+  /* Para se ver o tamanho do container
+  outline: dashed 1px black;
+  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .grid {
   display: grid;
   grid-template-columns: 200px auto;
@@ -9,7 +21,6 @@
     'footer footer';
   column-gap: 3px;
   row-gap: 5px;
-  alignment: center;
 }
 
 .page-header {

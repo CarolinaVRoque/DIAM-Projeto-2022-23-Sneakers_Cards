@@ -6,6 +6,8 @@
         <form class="register"  method="post" action="{% url 'SneakerCards:register' %}" enctype="multipart/form-data">
           {% csrf_token %}
             <h1>Criar um novo utilizador</h1>
+
+            <div class="register_box">
             <fieldset>
                 <label for="avatar">ProfilePic:</label>
                 <input type="file" id="avatar" name="avatar" accept="image/gif, image/jpg, image/jpeg, image/png"><br>
@@ -18,6 +20,8 @@
                 <label for="email">Email:</label><br>
                 <input type="text" id="email" name="email"><br>
             </fieldset>
+            </div>
+
                 <input type="submit" value="Registar">
                 <input type="reset" value="Limpar dados">
         </form>

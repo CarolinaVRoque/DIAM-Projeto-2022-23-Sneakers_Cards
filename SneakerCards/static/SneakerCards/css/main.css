@@ -214,3 +214,10 @@ body{
   cursor: pointer;
 }
 
+.register{
+ color: white;
+}
+
+.register_box {
+   background-color: rgba(120,120,120,0.8);
+}

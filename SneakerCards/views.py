@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth import login as auth_login
-
+from django.contrib.auth import logout as auth_logout
 from SneakerCards.models import Collector, CardType, Cards
 
 
@@ -102,3 +102,12 @@ def add_cards(request):
 
 def view_cards(request):
     return render(request, 'SneakerCards/view_cards.html')
+
+
+def dashboard(request):
+    return None
+
+
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect(reverse('SneakerCards:index'))

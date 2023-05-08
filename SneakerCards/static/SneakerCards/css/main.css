@@ -1,15 +1,12 @@
 {% load static %}
 
-.grid_container{
-  height: 100vh;
-  /* Para se ver o tamanho do container
-  outline: dashed 1px black;
-  */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
+
+
+body{
+  background-image: url("../images/img.png");
 }
+
 
 .grid {
   display: grid;
@@ -21,6 +18,10 @@
     'footer footer';
   column-gap: 3px;
   row-gap: 5px;
+  padding-top: 5%;
+  padding-left: 5%;
+
+
 }
 
 .page-header {
@@ -41,13 +42,14 @@
 
 .content {
   color: #242424;
-  background-color: #ffff22;
+  background-color: #717171;
   font-weight: 600;
   text-align: center;
   box-sizing: border-box;
   height: 100%;
   padding: 10px;
   border-radius: 40px;
+  opacity: 0.6;
 
 
 }
@@ -55,10 +57,10 @@
 .menu-button{
   padding: 20px 0;
   width: 200px;
-  background:none;
-  border: 1px solid blue;
-  color: transparent;
-  box-shadow : 0 0 5px 2px #2e00fd7b;
+  background:#f2f2f2;
+  border: 1px whitesmoke;
+  color: #242424;
+  box-shadow : 0 0 5px 2px #bbbbbb;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -71,7 +73,7 @@
   content:"";
   height: 100px;
   width: 200px;
-  background: linear-gradient(90deg, #2e00fd, #2e00fd7b);
+  background: linear-gradient(90deg, #bbbbbb, #242424);
   position: absolute;
   bottom:0;
   left:0;
@@ -83,7 +85,7 @@
 }
 
 .menu-button:hover{
-  color:black;
+  color:whitesmoke;
 }
 
 .containerForm {

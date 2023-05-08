@@ -105,7 +105,7 @@ def view_cards(request):
 
 
 def dashboard(request):
-    return None
+    return render(request,'SneakerCards/dashboard.html')
 
 
 def logout(request):

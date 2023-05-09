@@ -1,4 +1,17 @@
 {% extends "SneakerCards/template.html" %}
 {% block content %}
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
     <h1>About</h1>
+    <fieldset>
+        O nosso website dá-te a possibilidade de colecionares cartas.
+        Mas não são cartas quaisquer!
+        Damos-te a possibilidade de trocar de cartas de jogo com outros utilizadores já existentes, como também a compra
+        e venda das mesmas.
+        Atualmente já se encontram disponiveis cerca de 36 cartas.
+        No nosso site:
+        Utilizadores/Jogadores/Colecionadores: compram “Boosters” (conjunto de várias
+        cartas aleatórias) e podem mais tarde fazer posts a solicitar troca de cartas.
+    </fieldset>
 {% endblock content %}

@@ -113,3 +113,6 @@ def dashboard(request):
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('SneakerCards:index'))
+
+def my_deck(request):
+    return render(request, 'SneakerCards/my_decks.html')

@@ -228,3 +228,14 @@ body{
 fieldset{
     background-color: rgba(120,120,120,0.8);
 }
+
+#deck-grid-container{
+  display : flex;
+  flex-warp: flex-warp;
+}
+
+.deck-grid-item{
+  border: 1px white;
+  padding: 10px;
+  margin: 5px;
+}

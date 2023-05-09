@@ -1,0 +1,10 @@
+{% extends "SneakerCards/logged_template.html" %}
+{% block userContent %}
+{%load static%}
+    <div id="deck-grid-container">
+        <div class="deck-grid-item">Add item</div>
+    </div>
+    <button id="add-item-btn">Add item</button>
+    <script src="{% static 'SneakerCards/js/add_deck.js' %}"></script>
+
+{% endblock userContent %}

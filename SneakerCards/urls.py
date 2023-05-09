@@ -14,6 +14,7 @@ urlpatterns = [
     path('view_cards', views.view_cards, name='view_cards'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('logout', views.logout, name='logout'),
+    path('my_deck', views.my_deck, name='my_deck'),
 
 
 

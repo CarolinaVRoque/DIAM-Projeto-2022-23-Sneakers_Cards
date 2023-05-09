@@ -105,7 +105,9 @@ def view_cards(request):
 
 
 def dashboard(request):
-    return render(request,'SneakerCards/dashboard.html')
+    userid = request.session.get('username')
+    user_info = User.objects.get(username=userid)
+    return render(request,'SneakerCards/dashboard.html', {'userInfor': user_info})
 
 
 def logout(request):

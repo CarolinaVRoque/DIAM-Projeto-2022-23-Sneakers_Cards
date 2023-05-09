@@ -1,5 +1,5 @@
-{% extends "SneakerCards/template.html" %}
-{% block content %}
+{% extends "SneakerCards/logged_template.html" %}
+{% block userContent %}
     <div class="containerForm">
         <form class="register"  method="post" action="{% url 'SneakerCards:add_cards' %}" enctype="multipart/form-data">
         {% if sucess_message or error_message %}
@@ -38,4 +38,4 @@
                 <input type="reset" value="Limpar dados">
         </form>
     </div>
-{%  endblock content %}
+{%  endblock userContent %}

@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from SneakerCards.models import Collector, CardType, Cards
+from django.core import serializers
 
 
 # Create your views here.
@@ -101,7 +102,8 @@ def add_cards(request):
 
 
 def view_cards(request):
-    return render(request, 'SneakerCards/view_cards.html')
+    deck = Cards.objects.all()
+    return render(request, 'SneakerCards/view_cards.html', {'deck': deck})
 
 
 def dashboard(request):
@@ -113,3 +115,5 @@ def dashboard(request):
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('SneakerCards:index'))
+
+

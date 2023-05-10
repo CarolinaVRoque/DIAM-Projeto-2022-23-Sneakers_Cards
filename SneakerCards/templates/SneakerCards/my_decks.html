@@ -1,16 +1,15 @@
 {% extends "SneakerCards/logged_template.html" %}
 {% block userContent %}
-    {%load static%}
-    <div class="deck-grid-container">
-      {% for deck in decks %}
-        <div class="deck-grid-item">{{deck.name}}</div>
-      {% empty %}
-        <div class="deck-grid-item">No decks</div>
-      {% endfor %}
-    </div>
-      <form id="add-item-form" method="POST" action="{% url 'SneakerCards:update_deck' %}">
-        {% csrf_token %}
-        <button type="submit" id="add-item-btn">Add item</button>
-      </form>
-
+  {% load static %}
+  <div class="deck-grid-container">
+    {% for deck in decks %}
+      <span class="deck-grid-item">{{ deck.name }}</span>
+    {% empty %}
+      <div class="deck-grid-item">No decks</div>
+    {% endfor %}
+  </div>
+  <form id="add-item-form" method="POST" action="{% url 'SneakerCards:update_deck' %}">
+    {% csrf_token %}
+    <button type="submit" id="add-item-btn">Add item</button>
+  </form>
 {% endblock userContent %}

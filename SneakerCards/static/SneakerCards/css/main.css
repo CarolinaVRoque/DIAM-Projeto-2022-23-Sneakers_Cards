@@ -5,7 +5,8 @@
 }
 body{
   background-image: url("../images/img.png");
-
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
 }
 
 
@@ -231,6 +232,11 @@ body{
 .register_box {
    background-color: rgba(120,120,120,0.8);
 }
+
+.login{
+  color: white;
+}
+
 
 fieldset{
     background-color: rgba(120,120,120,0.8);

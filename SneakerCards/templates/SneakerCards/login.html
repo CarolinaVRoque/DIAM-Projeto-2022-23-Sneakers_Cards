@@ -3,7 +3,6 @@
     {%  if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {%  endif %}
-    <h1>Login</h1>
     <div class="containerForm">
         <form class="login"  method="post" action="{% url 'SneakerCards:login' %}">
             {% csrf_token %}

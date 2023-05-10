@@ -15,9 +15,7 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('logout', views.logout, name='logout'),
     path('my_deck', views.my_deck, name='my_deck'),
-
-
-
+    path('buy_booster', views.buy_booster, name='buy_booster'),
 ]
 
 if settings.DEBUG:

@@ -12,6 +12,7 @@ class Collector(models.Model):
     avatar = models.ImageField(upload_to='avatars', blank=True)
 
 
+
 class CardType(models.Model):
     descript = models.CharField(max_length=100)
     type = models.CharField(max_length=100)

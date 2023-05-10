@@ -105,11 +105,16 @@ def view_cards(request):
     deck = Cards.objects.all()
     return render(request, 'SneakerCards/view_cards.html', {'deck': deck})
 
+def buy_booster(request):
+    userid = request.session.get('username')
+    user_info = User.objects.get(username=userid)
+    return render(request, 'SneakerCards/buy_booster.html', {'userInfo': user_info})
+
 
 def dashboard(request):
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
-    return render(request,'SneakerCards/dashboard.html', {'userInfor': user_info})
+    return render(request,'SneakerCards/dashboard.html', {'userInfo': user_info})
 
 
 def logout(request):

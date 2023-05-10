@@ -230,6 +230,37 @@ body{
 fieldset{
     background-color: rgba(120,120,120,0.8);
 }
+
+.booster_container{
+  display: flex;
+  justify-content: center;
+
+}
+
+.credits_info {
+  font-family: 'Lucida Handwriting Std', sans-serif;
+  font-size: larger;
+  color: white;
+  background-color: rgba(120,120,120,0.8);
+}
+
+.booster_option_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px;
+
+}
+
+.booster_description {
+  font-family: 'Lucida Handwriting Std', sans-serif;
+  font-size: large;
+  color: white;
+  background-color: rgba(0,0,0,0.8);
+}
+
+
 .main_container{
     display:flex;
 }

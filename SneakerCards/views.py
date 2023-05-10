@@ -101,9 +101,10 @@ def add_cards(request):
         return render(request, 'SneakerCards/add_cards.html', {'card_types': card_types})
 
 
-def view_cards(request):
-    deck = Cards.objects.all()
-    return render(request, 'SneakerCards/view_cards.html', {'deck': deck})
+def view_cards(request, cards=None):
+    if cards is None:
+        cards = Cards.objects.all()
+    return render(request, 'SneakerCards/view_cards.html', {'cards': cards, 'source': 'sneakerdex'})
 
 
 def buy_booster(request):
@@ -134,10 +135,17 @@ def update_deck(request):
     decks = Deck.objects.filter(collector=collector)
     print("Form submitted successfully")
     if request.method == 'POST':
-        cards = Cards.objects.all()
-        deck = Deck.objects.create(name="new deck", power=30, collector=collector)
-        deck.cards.set(cards)
+        deck_name = request.POST.get('deck_name')
+        print(deck_name)
+        deck = Deck.objects.create(name=deck_name, power=30, collector=collector)
         deck.save()
         return redirect('SneakerCards:my_deck')
 
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
+
+def view_deck(request, collector_id, deck_id):
+    collector = get_object_or_404(Collector, pk=collector_id)
+    deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
+    cards = deck.cards
+    return redirect(reverse('SneakerCards:view_cards') + f'?cards={cards}')
+

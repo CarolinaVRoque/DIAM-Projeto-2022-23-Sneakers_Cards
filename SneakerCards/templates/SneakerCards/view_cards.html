@@ -1,31 +1,21 @@
-{% extends "SneakerCards/template.html" %}
+{% extends "SneakerCards/logged_template.html" %}
 {% block head %}
     {% load static %}
     <link href="{% static 'SneakerCards/css/main.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet">
 {% endblock head %}
-{% block content %}
-    <script src="{% static 'SneakerCards/js/functions.js' %}"></script>
+{% block userContent %}
     <div class="content">
-
-              <aside class="page-leftbar">
-                <div class="content" style="background-color:black">
-                  <p>Leftbar</p>
-                </div>
-              </aside>
               <main class="page-main">
                 <div class="content">
                     <!-- Slideshow container -->
                     <div class="slideshow-container">
-
-
-                        {%  for Cards in deck %}
+                        {%  for card in cards %}
                             <script> showSlides(slideIndex)</script>
                             <!-- Full-width images with number and caption text -->
                             <div class="mySlides fade">
-                                <p> {{ Cards.name }} </p>
-                                <img src="{{ Cards.image }}" alt="{{ Cards.description }}">
-
+                                <p> {{ card.name }} </p>
+                                <img src="{{ card.image }}" alt="{{ card.description }}">
                             </div>
                         {% endfor %}
                       <!-- Next and previous buttons -->
@@ -33,10 +23,12 @@
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     </div>
                     <br>
+                {% if source == 'view_deck' %}
+                    <a href="{% url 'SneakerCards:my_deck' %}">Back to Deck</a>
+                {% endif %}
                 </div>
               </main>
         </div>
-
-
-{% endblock %}
+    <script src="{% static 'SneakerCards/js/functions.js' %}"></script>
+{% endblock userContent %}
 

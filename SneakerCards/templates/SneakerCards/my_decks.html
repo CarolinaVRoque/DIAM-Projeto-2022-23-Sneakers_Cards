@@ -3,13 +3,18 @@
   {% load static %}
   <div class="deck-grid-container">
     {% for deck in decks %}
-      <span class="deck-grid-item">{{ deck.name }}</span>
+        <a href="{% url 'SneakerCards:view_deck' deck.id deck.collector.id %}">
+            <span class="deck-grid-item">{{ deck.name }}</span>
+        </a>
     {% empty %}
       <div class="deck-grid-item">No decks</div>
     {% endfor %}
   </div>
   <form id="add-item-form" method="POST" action="{% url 'SneakerCards:update_deck' %}">
     {% csrf_token %}
-    <button type="submit" id="add-item-btn">Add item</button>
+      <br>
+      <label for="deck_name">Deck name:</label>
+      <textarea id="deck_name" name="deck_name" style="resize: none; height: 25px;"></textarea><br>
+      <button type="submit" id="add-item-btn">Add item</button>
   </form>
 {% endblock userContent %}

@@ -2,11 +2,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from SneakerCards.models import Collector, CardType, Cards
+from SneakerCards.models import Collector, CardType, Cards, Deck
 from django.core import serializers
 
 
@@ -105,6 +105,7 @@ def view_cards(request):
     deck = Cards.objects.all()
     return render(request, 'SneakerCards/view_cards.html', {'deck': deck})
 
+
 def buy_booster(request):
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
@@ -114,14 +115,29 @@ def buy_booster(request):
 def dashboard(request):
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
-    return render(request,'SneakerCards/dashboard.html', {'userInfo': user_info})
+    return render(request, 'SneakerCards/dashboard.html', {'userInfo': user_info})
 
 
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('SneakerCards:index'))
 
+
 def my_deck(request):
-    return render(request, 'SneakerCards/my_decks.html')
+    collector = get_object_or_404(Collector, user=request.user)
+    decks = Deck.objects.filter(collector=collector)
+    return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
 
+def update_deck(request):
+    collector = get_object_or_404(Collector, user=request.user)
+    decks = Deck.objects.filter(collector=collector)
+    print("Form submitted successfully")
+    if request.method == 'POST':
+        cards = Cards.objects.all()
+        deck = Deck.objects.create(name="new deck", power=30, collector=collector)
+        deck.cards.set(cards)
+        deck.save()
+        return redirect('SneakerCards:my_deck')
+
+    return render(request, 'SneakerCards/my_decks.html', {'decks': decks})

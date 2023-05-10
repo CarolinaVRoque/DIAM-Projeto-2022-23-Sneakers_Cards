@@ -1,8 +1,11 @@
 {% load static %}
 
-
+* {
+  color: white;
+}
 body{
   background-image: url("../images/img.png");
+
 }
 
 
@@ -292,12 +295,16 @@ fieldset{
 
 
 #deck-grid-container{
-  display : flex;
-  flex-warp: flex-warp;
+  display: grid;
+  grid-gap: 10px;
 }
 
 .deck-grid-item{
-  border: 1px white;
+  border: 1px solid black;
   padding: 10px;
-  margin: 5px;
+  background-image: url('../images/background.png');
+  background-size: cover; /* Set the background image to cover the item */
+  background-repeat: no-repeat;
+  background-position: center; /* Center the background image */
+  width: 200px;
 }

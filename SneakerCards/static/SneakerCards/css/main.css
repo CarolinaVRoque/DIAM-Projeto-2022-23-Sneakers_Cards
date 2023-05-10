@@ -1,6 +1,8 @@
 {% load static %}
 
-
+* {
+  color: white;
+}
 body{
   background-image: url("../images/img.png");
   backdrop-filter: blur(8px);
@@ -295,4 +297,35 @@ fieldset{
 }
 .content_footer{
   padding: 10px;
+}
+
+
+#deck-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+#deck-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.deck-grid-item {
+  border: 1px solid black;
+  padding: 10px;
+  background-image: url('../images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 200px;
+  flex: 0 0 calc(33.33% - 10px);
+  margin-bottom: 20px; /* Increase the vertical spacing between rows */
 }

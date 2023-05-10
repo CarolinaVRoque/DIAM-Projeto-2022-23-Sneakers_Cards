@@ -3,6 +3,8 @@
 
 body{
   background-image: url("../images/img.png");
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
 }
 
 

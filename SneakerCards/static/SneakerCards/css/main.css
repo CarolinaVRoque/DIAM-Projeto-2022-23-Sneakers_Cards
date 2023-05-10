@@ -18,6 +18,7 @@ body{
   row-gap: 5px;
   padding-top: 5%;
   padding-left: 5%;
+  padding-right: 5%;
 }
 
 .page-header {
@@ -42,7 +43,6 @@ body{
 .page-footer {
   grid-area: footer;
   position: relative;
-
 }
 
 .content {
@@ -69,6 +69,7 @@ body{
   cursor: pointer;
   letter-spacing: 2px;
   transition: .6s  ;
+  border-radius: 15px;
 }
 
 .menu-button::before{
@@ -233,17 +234,25 @@ fieldset{
     display:flex;
 }
 .social-icons a {
-  display: inline-block;
-  margin-right: 10px;
-  color: #000;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  color: black;
+  font-size: 30px;
+  text-decoration: none;/* Remove a linha de texto decorativo */
+  padding-top: 15px;
 }
 
 .social-icons a:hover {
-  color: white; /* Cor de destaque ao passar o mouse */
+  color: white; /* Cor de destaque ao passar o rato */
 }
 
 .footer_container{
     display: flex;
     background-color: rgba(120,120,120,0.8);
+    border-radius: 15px;
+
+}
+.content_footer{
+  padding: 10px;
 }

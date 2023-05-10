@@ -8,63 +8,64 @@
     {% endblock head %}
     <link rel="stylesheet" href="{% static 'SneakerCards/css/main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-
 </head>
 
-        <div class="grid">
-        <header class="page-header">
-        </header>
+<div class="grid">
+    <header class="page-header">
+    </header>
 
-        <nav class="page-leftbar">
-            {% csrf_token %}
+    <nav class="page-leftbar">
+        {% csrf_token %}
 
-          <form method="get" action="{% url 'SneakerCards:index' %}">
+        <form method="get" action="{% url 'SneakerCards:index' %}">
             <button type="submit" class="menu-button">Home</button>
-          </form>
-          <form method="get" action="{% url 'SneakerCards:about' %}">
+        </form>
+        <form method="get" action="{% url 'SneakerCards:about' %}">
             <button type="submit" class="menu-button">About</button>
-          </form>
-            {% if user.is_authenticated %}
-                <form method="get" action="{% url 'SneakerCards:dashboard' %}">
-                    <button type="submit" class="menu-button">Dashboard</button>
-                 </form>
-                <form method="get" action="{% url 'SneakerCards:view_cards' %}">
-                    <button type="submit" class="menu-button">SneakerDex</button>
-                </form>
-                <form method="get" action="{% url 'SneakerCards:logout' %}">
-                    <button type="submit" class="menu-button">Logout</button>
-                </form>
-            {% else %}
-                <form method="get" action="{% url 'SneakerCards:register' %}">
-                    <button type="submit" class="menu-button">Register</button>
-                </form>
-                <form method="get" action="{% url 'SneakerCards:login' %}">
-                     <button type="submit" class="menu-button">Login</button>
-                </form>
-            {% endif %}
-        </nav>
-        <main class="page-main">
-                {% block content %}
-                {% endblock %}
-        </main>
+        </form>
+        {% if user.is_authenticated %}
+            <form method="get" action="{% url 'SneakerCards:dashboard' %}">
+                <button type="submit" class="menu-button">Dashboard</button>
+            </form>
+            <form method="get" action="{% url 'SneakerCards:view_cards' %}">
+                <button type="submit" class="menu-button">SneakerDex</button>
+            </form>
+            <form method="get" action="{% url 'SneakerCards:logout' %}">
+                <button type="submit" class="menu-button">Logout</button>
+            </form>
+        {% else %}
+            <form method="get" action="{% url 'SneakerCards:register' %}">
+                <button type="submit" class="menu-button">Register</button>
+            </form>
+            <form method="get" action="{% url 'SneakerCards:login' %}">
+                <button type="submit" class="menu-button">Login</button>
+            </form>
+        {% endif %}
+    </nav>
+    <main class="page-main">
+        {% block content %}
+        {% endblock %}
+    </main>
 
     <footer class="page-footer">
         <div class="footer_container">
             <div class="content_footer">
-            <p>Os nossos contactos:</p>
-            <p>E-mail: sneakers_cards@cards.pt</p>
-            <p>Número de Telemóvel: +315 966666666</p>
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/seu_perfil_instagram" target="_blank"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/seu_perfil_facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-        </div>
+                <p>Os nossos contactos:</p>
+                <p>E-mail: sneakers_cards@cards.pt</p>
+                <p>Número de Telemóvel: +315 966666666</p>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/seu_perfil_instagram" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/seu_perfil_facebook" target="_blank"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com/seu_perfil_twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+
+            </div>
         </div>
     </footer>
 
-    </div>
-
+</div>
 
 
 </html>

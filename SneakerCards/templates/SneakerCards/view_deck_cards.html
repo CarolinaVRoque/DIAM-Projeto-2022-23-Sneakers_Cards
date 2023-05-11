@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet">
 {% endblock head %}
 {% block userContent %}
+    {% load static %}
     <div class="content">
               <main class="page-main">
                 <div class="content">
@@ -15,7 +16,7 @@
                             <!-- Full-width images with number and caption text -->
                             <div class="mySlides fade">
                                 <p> {{ card.name }} </p>
-                                <img src=" {{card.image}} " alt="{{ card.description }}">
+                                <img src="{{ card.image }}  " alt="{{ card.description }}">
                             </div>
                         {% endfor %}
                       <!-- Next and previous buttons -->
@@ -23,10 +24,10 @@
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     </div>
                     <br>
+
                 </div>
-              {% if source == 'view_deck' %}
-                    <a href="{% url 'SneakerCards:my_deck' %}">Back to Decks</a>
-                {% endif %}
+                    <a href="{% url 'SneakerCards:my_deck' %}">Back to Decks</a><br>
+                    <a href="{% url 'SneakerCards:index' %}">Trade card</a>
               </main>
         </div>
     <script src="{% static 'SneakerCards/js/functions.js' %}"></script>

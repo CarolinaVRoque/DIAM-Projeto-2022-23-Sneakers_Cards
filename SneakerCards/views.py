@@ -8,6 +8,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from SneakerCards.models import Collector, CardType, Cards, Deck
 from django.core import serializers
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -101,10 +102,12 @@ def add_cards(request):
         return render(request, 'SneakerCards/add_cards.html', {'card_types': card_types})
 
 
-def view_cards(request, cards=None):
-    if cards is None:
-        cards = Cards.objects.all()
-    return render(request, 'SneakerCards/view_cards.html', {'cards': cards, 'source': 'sneakerdex'})
+def view_cards(request):
+    cards = Cards.objects.all()
+    print(cards)
+    return render(request, 'SneakerCards/view_cards.html', {'cards': cards})
+
+
 
 
 def buy_booster(request):
@@ -140,12 +143,17 @@ def update_deck(request):
         deck = Deck.objects.create(name=deck_name, power=30, collector=collector)
         deck.save()
         return redirect('SneakerCards:my_deck')
-
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
 def view_deck(request, collector_id, deck_id):
     collector = get_object_or_404(Collector, pk=collector_id)
     deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
-    cards = deck.cards
-    return redirect(reverse('SneakerCards:view_cards') + f'?cards={cards}')
+    cards = deck.cards.all()
+    print(cards)
+    return render(request, 'SneakerCards/view_deck_cards.html', {'cards': cards, 'deck': deck})
 
+def trade_card(request, card_id, deck_id):
+    throught_model = Deck.cards.through
+    assc_id = throught_model.objects.filter(cards__id = card_id, deck__id=deck_id).values_list('id', flat=True).first()
+
+    return redirect('SneakerCards:view_deck', collector_id=request.user.id, deck_id=deck_id)

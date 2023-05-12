@@ -11,6 +11,7 @@ body {
     background-image: url("../images/img.png");
     backdrop-filter: blur(8px);
     border-radius: 15px;
+    font-family: Consolas;
 }
 
 /*grid do site*/
@@ -67,6 +68,7 @@ body {
     height: 100%;
     padding: 10px;
     border-radius: 20px;
+    font-family: Consolas;
 }
 
 /*menu dos botões do site*/
@@ -85,42 +87,15 @@ body {
   letter-spacing: 2px;
   transition: .6s  ;
   border-radius: 15px;
-  /*font-family:futura;*/
+    font-family: Consolas;
 }
 
-/*!*depois de clicarmos num dos botões*!*/
-/*.btn::before{*/
-/*  content:"";*/
-/*  height: 100px;*/
-/*  width: 200px;*/
-/*  background: linear-gradient(90deg, #bbbbbb, #242424);*/
-/*  position: absolute;*/
-/*  bottom:0;*/
-/*  left:0;*/
-/*  transition: .5s;*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*!*quando temos o rato sobre o botão*!*/
-/*.btn:hover::before{*/
-/*  left:100%;*/
-/*}*/
-
-/*!*Style the buttons*!*/
-/*.btn {*/
-/*    border: none;*/
-/*    outline: none;*/
-/*    padding: 10px 16px;*/
-/*    background-color: #f1f1f1;*/
-/*    cursor: pointer;*/
-/*}*/
 
 /* Style the active class (and buttons on mouse-over) */
 .active, .btn:hover {
     background-color: #666;
     color: white;
 }
-
 
 .containerForm {
     display: flex;
@@ -130,6 +105,7 @@ body {
 
 * {
     box-sizing: border-box
+
 }
 
 /* Slideshow container */
@@ -317,16 +293,13 @@ fieldset {
 .social-icons a {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 620px;
     color: black;
     font-size: 30px;
     text-decoration: none; /* Remove a linha de texto decorativo */
     padding-top: 15px;
     cursor: pointer;
-}
 
-.social-icons {
-    margin-right: auto;
 }
 
 /*ao passar o rato sobre os icons*/
@@ -345,11 +318,7 @@ fieldset {
 .content_footer {
     padding: 10px;
     text-align: left;
-}
-
-.social-icons {
-    text-align: right;
-    justify-content: flex-end;
+    font-family: Consolas;
 }
 
 .about_title {
@@ -359,15 +328,6 @@ fieldset {
 .about {
     color: white;
 }
-
-/*#deck-grid-container {*/
-/*  display: flex;*/
-/*  flex-wrap: wrap;*/
-/*  justify-content: flex-start;*/
-/*  align-items: center;*/
-/*  gap: 10px;*/
-/*  overflow-x: auto;*/
-/*}*/
 
 #deck-grid-container {
     display: flex;

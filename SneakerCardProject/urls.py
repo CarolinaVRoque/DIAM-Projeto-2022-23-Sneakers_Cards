@@ -23,8 +23,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('SneakerCards/', include('SneakerCards.urls')),
 ]
-# Add the following line to serve static files
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# Add the following line to serve media files
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

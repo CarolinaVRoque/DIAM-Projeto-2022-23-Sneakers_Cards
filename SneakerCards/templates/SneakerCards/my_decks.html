@@ -1,15 +1,19 @@
 {% extends "SneakerCards/logged_template.html" %}
 {% block userContent %}
   {% load static %}
-  <div class="deck-grid-container">
     {% for deck in decks %}
-        <a href="{% url 'SneakerCards:view_deck' deck.id deck.collector.id %}">
-            <span class="deck-grid-item">{{ deck.name }}</span>
-        </a>
+        <div class="deck-grid-container">
+            <figure>
+             <a href="{% url 'SneakerCards:view_deck' deck.collector.id deck.id %}">
+                <img src="{% static 'SneakerCards/images/background.png' %}" width="150px" alt="deck-image">
+                <figcaption>{{ deck.name}}</figcaption>
+             </a>
+        </figure>
+        </div>
     {% empty %}
-      <div class="deck-grid-item">No decks</div>
+        <img src="{% static 'SneakerCards/images/background.png' %}" width="150px" alt="deck-image">
+        <span>No decks yet</span>
     {% endfor %}
-  </div>
   <form id="add-item-form" method="POST" action="{% url 'SneakerCards:update_deck' %}">
     {% csrf_token %}
       <br>

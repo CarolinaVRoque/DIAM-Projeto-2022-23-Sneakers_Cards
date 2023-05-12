@@ -10,14 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link href="https://fonts.cdnfonts.com/css/lucida-handwriting-std" rel="stylesheet">
 </head>
-
 <div class="grid">
     <header class="page-header">
     </header>
-
-    <nav class="page-leftbar">
+    <nav class="page-leftbar" id="page-leftbar">
         {% csrf_token %}
-
         <form method="get" action="{% url 'SneakerCards:index' %}">
             <button type="submit" class="menu-button">Home</button>
         </form>
@@ -43,6 +40,7 @@
             </form>
         {% endif %}
     </nav>
+
     <main class="page-main">
         {% block content %}
         {% endblock %}

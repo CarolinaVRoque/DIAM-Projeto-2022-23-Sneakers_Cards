@@ -33,4 +33,4 @@ class Deck(models.Model):
     cards = models.ManyToManyField(Cards)
     name = models.CharField(max_length=100)
     power = models.IntegerField(null=True)
-    collector = models.ForeignKey(Collector, on_delete=models.CASCADE)
+    collector = models.ForeignKey(Collector, on_delete=models.CASCADE, null=True)

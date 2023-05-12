@@ -108,8 +108,6 @@ def view_cards(request):
     return render(request, 'SneakerCards/view_cards.html', {'cards': cards})
 
 
-
-
 def buy_booster(request):
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
@@ -145,15 +143,32 @@ def update_deck(request):
         return redirect('SneakerCards:my_deck')
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
+
 def view_deck(request, collector_id, deck_id):
     collector = get_object_or_404(Collector, pk=collector_id)
     deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
     cards = deck.cards.all()
-    print(cards)
-    return render(request, 'SneakerCards/view_deck_cards.html', {'cards': cards, 'deck': deck})
+    if len(cards) == 0:
+        print("null")
+        return render(request, 'SneakerCards/view_deck_cards.html', {'deck': deck})
+    else:
+        print(cards)
+        return render(request, 'SneakerCards/view_deck_cards.html', {'cards': cards, 'deck': deck})
 
-def trade_card(request, card_id, deck_id):
+
+def sell_card(request, card_id, deck_id):
     throught_model = Deck.cards.through
-    assc_id = throught_model.objects.filter(cards__id = card_id, deck__id=deck_id).values_list('id', flat=True).first()
-
+    assc_id = throught_model.objects.filter(cards__id=card_id, deck__id=deck_id).values_list('id', flat=True).first()
+    print(card_id)
+    throught_model.objects.filter(id=assc_id).delete()
+    collector = Collector.objects.get(pk=request.user.id)
+    price = Cards.objects.get(pk=card_id).card_type.saleValue
+    collector.credits += price
+    collector.save()
     return redirect('SneakerCards:view_deck', collector_id=request.user.id, deck_id=deck_id)
+
+
+def openBooster(request):
+    source = request.GET.get('source')
+    print(source)
+    return None

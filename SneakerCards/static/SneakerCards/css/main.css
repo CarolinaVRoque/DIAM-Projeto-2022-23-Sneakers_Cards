@@ -100,7 +100,6 @@ body {
 
 * {
     box-sizing: border-box
-
 }
 
 /* Slideshow container */
@@ -239,12 +238,13 @@ body {
 }
 
 .login {
-    color: white;
+    color: black;
 }
 
 
 fieldset {
     background-color: rgba(120, 120, 120, 0.8);
+    color=black;
 }
 
 .booster_container {

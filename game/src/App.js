@@ -42,7 +42,7 @@ function App() {
         setChoiceTwo(null)
         setCards(shuffledCards)
         setCredits(200)
-        getAndUpdateUserInfo()
+
 
     }
 
@@ -65,7 +65,7 @@ function App() {
                             if (isGameEnd()){
                                 setGameEnd(true)
                                 console.log("Game Over")
-                                //getAndUpdateUserInfo()
+                                getAndUpdateUserInfo()
                             }
                             return card
                         } else {

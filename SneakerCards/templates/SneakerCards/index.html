@@ -1,9 +1,9 @@
-{%  extends 'SneakerCards/template.html' %}
-{% block content %}
+{%  extends 'SneakerCards/logged_template.html' %}
+{% block userContent %}
     {%  if request.session.username %}
     <p>Hi {{ request.session.username }}</p>
     {% else %}
         <p>Hi Guest</p>
     {% endif %}
     <p>INDEX</p>
-{% endblock content %}
+{% endblock userContent %}

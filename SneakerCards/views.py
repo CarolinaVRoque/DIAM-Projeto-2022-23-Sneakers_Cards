@@ -184,12 +184,14 @@ def openBooster(request):
         collector.credits -= 175
     elif source == 'king':
         multiplier = 3
-        collector -= 250
+        collector.credits -= 250
     else:
         return render(request, 'SneakerCards/buy_booster.html', {'error_message': 'Error. Invalid source'})
 
     if collector.credits < 0:
-        return render(request, 'SneakerCards/buy_booster.html', {'error_message': 'Insuficient credits'})
+        user_info = User.objects.get(username=request.session.get('username'))
+        return render(request, 'SneakerCards/buy_booster.html', {'error_message': 'Insuficient credits',
+                                                                 'userInfo': user_info})
 
     collector.save()
     card_types = CardType.objects.all()

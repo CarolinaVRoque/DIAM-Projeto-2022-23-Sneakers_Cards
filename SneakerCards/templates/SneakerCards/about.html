@@ -1,5 +1,5 @@
-{% extends "SneakerCards/template.html" %}
-{% block content %}
+{% extends "SneakerCards/logged_template.html" %}
+{% block userContent %}
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
@@ -16,4 +16,4 @@
         </fieldset>
     </div>
     </div>
-{% endblock content %}
+{% endblock userContent %}

@@ -1,15 +1,23 @@
 {%  extends 'SneakerCards/logged_template.html' %}
 {% block userContent %}
+    {% load static %}
     <h1>Dashboard</h1>
     {% if user.is_authenticated %}
         {%csrf_token%}
         <fieldset>
+        {% if user.collector.avatar %}
+             <img class="profile-pic" src="{{ user.collector.avatar }}" alt="Profile Picture">
+        {% else %}
+             <img class="profile-pic" src="{% static 'SneakerCards/images/person_empty_holder.png' %}" alt="Profile Picture">
+        {% endif %}
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" value="{{ user.username }}" disabled><br>
             <label for="full_name">Nome completo:</label><br>
             <input type="text" id="full_name" name="full_name" value="{{ user.collector.full_name }}" disabled><br>
             <label for="email">Email:</label><br>
             <input type="text" id="email" name="email" value="{{ user.email }}" disabled><br>
+            <label for="credits">Credits:</label><br>
+            <input type="text" id="credits" name ="credits" value="{{ user.collector.credits }}" disabled>
         </fieldset>
     {% else %}
         <strong><h1>Something wrong, not logged</h1></strong>

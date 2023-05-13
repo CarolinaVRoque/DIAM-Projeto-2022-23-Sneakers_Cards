@@ -1,10 +1,6 @@
 {% extends "SneakerCards/logged_template.html" %}
-{% block head %}
-    {% load static %}
-    <link href="{% static 'SneakerCards/css/main.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet">
-{% endblock head %}
 {% block userContent %}
+    {% load static %}
     {% if cards %}
                 <div class="slideshow-container">
                     {%  for card in cards %}

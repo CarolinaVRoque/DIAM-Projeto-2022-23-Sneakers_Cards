@@ -4,13 +4,14 @@
         integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 {% endblock head %}
 {% block content %}
+    {% if user.is_authenticated %}
         <div class="main_container">
                   <aside class="page-leftbar">
                       <div class="sidebar">
                        <i class="bi bi-chevron-double-right" onclick="expandSidebar()"></i>
                           {% if user.is_superuser %}
                             <div class="item" >
-                                <i class="bi bi-person-circle"></i>
+                                <i class="bi bi-file-earmark-plus-fill"></i>
                                 <a href="{%url 'SneakerCards:add_cards' %}"><span>Add cards</span></a>
                             </div>
                             <div class="item" >
@@ -27,14 +28,18 @@
                                 <a href="{%url 'SneakerCards:buy_booster' %}" class="meu-link"><span>Buy cards</span></a>
                             </div>
                             <div class="item" >
-                                <i class="bi bi-arrow-left-right"></i>
-                                <span>Trade Board</span>
+                                <i class="bi bi-person-circle"></i>
+                                <a href="{%url 'SneakerCards:dashboard' %}" class="meu-link"><span>My Profile</span></a>
                           </div>
                           {% endif %}
                    </div>
               </aside>
               <main class="page-main">
                 <div class="content">
+                {% if error_message %}
+                    <h1><strong>{{ error_message }}</strong></h1>
+                {% endif %}
+                {% endif %}
                     {% block userContent %}
                     {% endblock userContent %}
                 

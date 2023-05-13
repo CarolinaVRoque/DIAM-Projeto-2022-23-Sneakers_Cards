@@ -10,6 +10,15 @@ from SneakerCards.models import Collector, CardType, Cards, Deck
 from django.core import serializers
 from django.core.cache import cache
 import random
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from SneakerCardProject import settings
+from SneakerCards.models import Collector, CardType, Cards, Deck
+from SneakerCards.serializers import CollectorSerializer
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
@@ -69,7 +78,8 @@ def login(request):
     else:
         return render(request, 'SneakerCards/login.html')
 
-
+@user_passes_test(lambda u: u.is_superuser)
+@login_required()
 def add_cards(request):
     card_types = CardType.objects.all()
     if request.method == 'POST':
@@ -102,20 +112,22 @@ def add_cards(request):
     else:
         return render(request, 'SneakerCards/add_cards.html', {'card_types': card_types})
 
-
+@login_required
 def view_cards(request):
     cards = Cards.objects.all()
     print(cards)
     return render(request, 'SneakerCards/view_cards.html', {'cards': cards})
 
-
+@login_required
 def buy_booster(request):
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
     return render(request, 'SneakerCards/buy_booster.html', {'userInfo': user_info})
 
-
+@login_required
 def dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect(f"{settings.LOGIN_URL}?next={request.path}")
     userid = request.session.get('username')
     user_info = User.objects.get(username=userid)
     return render(request, 'SneakerCards/dashboard.html', {'userInfo': user_info})
@@ -125,13 +137,13 @@ def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('SneakerCards:index'))
 
-
+@login_required
 def my_deck(request):
     collector = get_object_or_404(Collector, user=request.user)
     decks = Deck.objects.filter(collector=collector)
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
-
+@login_required
 def update_deck(request):
     collector = get_object_or_404(Collector, user_id=request.user.id)
     decks = Deck.objects.filter(collector=collector.user_id)
@@ -144,7 +156,7 @@ def update_deck(request):
         return redirect('SneakerCards:my_deck')
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
-
+@login_required
 def view_deck(request, collector_id, deck_id):
     collector = get_object_or_404(Collector, user_id=request.user.id)
     deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
@@ -156,7 +168,7 @@ def view_deck(request, collector_id, deck_id):
         print(cards)
         return render(request, 'SneakerCards/view_deck_cards.html', {'cards': cards, 'deck': deck})
 
-
+@login_required
 def sell_card(request, card_id, deck_id):
     throught_model = Deck.cards.through
     assc_id = throught_model.objects.filter(cards__id=card_id, deck__id=deck_id).values_list('id', flat=True).first()
@@ -168,7 +180,7 @@ def sell_card(request, card_id, deck_id):
     collector.save()
     return redirect('SneakerCards:view_deck', collector_id=request.user.id, deck_id=deck_id)
 
-
+@login_required
 def openBooster(request):
     collector = get_object_or_404(Collector, user_id=request.user.id)
     decks = decks = Deck.objects.filter(collector=collector)
@@ -217,7 +229,7 @@ def openBooster(request):
         cards.append(random_card)
     return render(request, 'SneakerCards/open_booster.html', {'cards': cards, 'decks': decks})
 
-
+@login_required
 def trade_for_credits(request, card_id):
     card = Cards.objects.get(pk=card_id)
     collector = Collector.objects.get(user_id=request.user.id)
@@ -225,7 +237,7 @@ def trade_for_credits(request, card_id):
     collector.save()
     return HttpResponse(status=200)
 
-
+@login_required
 def add_card_deck(request, card_id, deck_id):
     if request.method == 'POST':
         print("post")
@@ -237,3 +249,21 @@ def add_card_deck(request, card_id, deck_id):
         return HttpResponse(status=200)
     else:
         return render(request, 'SneakerCards/open_booster.html')
+
+@api_view(['GET'])
+def collector_info(request, pk):
+        collector = Collector.objects.get(user_id=pk)
+        serializerQ = CollectorSerializer(collector, context={'request':request})
+        return Response(serializerQ.data)
+
+
+
+@api_view(['PUT'])
+def collector_edita(request, pk):
+        user_info = User.objects.get(id=pk)
+        col = user_info.collector
+        serializer = CollectorSerializer(col,data=request.data,context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)

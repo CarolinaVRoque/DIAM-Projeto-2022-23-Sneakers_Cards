@@ -408,3 +408,11 @@ a {
   color: white;
   transform: rotateY(180deg);
 }
+
+.index_about_text_container{
+    background-color: #717171;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+    border-radius: 20px;
+}

@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SneakerCards',
-    'bootstrap5'
+    'bootstrap5',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,8 +51,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
 ROOT_URLCONF = 'SneakerCardProject.urls'
 
 TEMPLATES = [
@@ -118,6 +129,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = 'SneakerCards/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'SneakerCards/static/media')
+
+LOGIN_URL = '/SneakerCards/login'
+LOGIN_REDIRECT_URL = '/SneakerCards/index'
 
 
 # Static files (CSS, JavaScript, Images)

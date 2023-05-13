@@ -53,10 +53,14 @@
                     {% endif %}
                 </div>
             </div>
-
             <div class="booster_option_container">
-                 <p> win credits</p>
+                <a href="http://localhost:3000?id={{ userInfo.collector.user_id}}"><img src="{% static 'SneakerCards/images/game.png' %}" alt="Win credits" style="width:225px;height:200px;"></a>
+                <div class="booster_description">
+                    <p style="text-align: center"><b>Play & Win credits</b></p>
             </div>
+
+
+
         </div>
 
 {% endblock %}

@@ -47,14 +47,6 @@ function App() {
 
 
 
-window.addEventListener('message', (event) => {
-  if (event.origin === 'SneackerCards' && event.data?.user) {
-    console.log(event.data?.user);
-  }
-  else{
-      console.log('no data')
-  }
-});
 
     const handleChoice = (card) => {
         choiceOne ? setChoiceTwo(card) : setChoiceOne(card)

@@ -1,9 +1,21 @@
 {%  extends 'SneakerCards/logged_template.html' %}
 {% block userContent %}
-    {%  if request.session.username %}
-    <p>Hi {{ request.session.username }}</p>
-    {% else %}
-        <p>Hi Guest</p>
-    {% endif %}
-    <p>INDEX</p>
+
+    <div index_about_text_container>
+        <div class="welcome">
+        {%  if request.session.username %}
+            <p>Welcome {{ request.session.username }}</p>
+        {% else %}
+            <p>Welcome Guest</p>
+        {% endif %}
+        </div>
+
+        <div class="index_about_text">
+
+            <h2>The focus of this site is the love for sneakers!</h2>
+            <p>Here you can get stylish sneaker cards and build several decks for your enjoyment.</p>
+            <p>We have a memory game where you can get credits. These credits can be used to buy boosters of 5 cards.</p>
+            <p>In the future it will be possible to trade card between card collectors.</p>
+        </div>
+    </div>
 {% endblock userContent %}

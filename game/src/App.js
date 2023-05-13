@@ -42,6 +42,7 @@ function App() {
         setChoiceTwo(null)
         setCards(shuffledCards)
         setCredits(200)
+        getAndUpdateUserInfo()
 
     }
 
@@ -64,7 +65,7 @@ function App() {
                             if (isGameEnd()){
                                 setGameEnd(true)
                                 console.log("Game Over")
-                                getAndUpdateUserInfo()
+                                //getAndUpdateUserInfo()
                             }
                             return card
                         } else {
@@ -114,6 +115,8 @@ function App() {
         let user = response.data
         user.credits = user.credits + credits
         console.log(user)
+        console.log(API_URL_COLLECTOR + '/' + user.user)
+
 
         const put = await axios.put(API_URL_COLLECTOR + '/' + user.user, {
             'user': user.user,

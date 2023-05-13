@@ -22,8 +22,6 @@ urlpatterns = [
     path('openBooster', views.openBooster, name='openBooster'),
     path('trade_for_credits/<int:card_id>/', views.trade_for_credits, name='trade_for_credits'),
     path('add_card_deck/<int:card_id>/<int:deck_id>/', views.add_card_deck, name='add_card_deck'),
-    path('api/collector/game/<int:pk>', views.collector_info),
-    path('api/collector/<int:pk>', views.collector_edita),
 ]
 
 if settings.DEBUG:

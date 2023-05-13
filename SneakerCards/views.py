@@ -44,7 +44,7 @@ def register(request):
             uploaded_file_url = fs.url(default_image)
             collector.avatar = uploaded_file_url[1:]
             collector.save()
-        if collector.pk is not None:
+        if collector.user_id is not None:
             return HttpResponseRedirect(reverse('SneakerCards:index'))
     else:
         return render(request, 'SneakerCards/register.html')
@@ -133,20 +133,20 @@ def my_deck(request):
 
 
 def update_deck(request):
-    collector = get_object_or_404(Collector, user=request.user)
-    decks = Deck.objects.filter(collector=collector)
+    collector = get_object_or_404(Collector, user_id=request.user.id)
+    decks = Deck.objects.filter(collector=collector.user_id)
     print("Form submitted successfully")
     if request.method == 'POST':
         deck_name = request.POST.get('deck_name')
         print(deck_name)
-        deck = Deck.objects.create(name=deck_name, power=30, collector=collector)
+        deck = Deck.objects.create(name=deck_name, power=30, collector = collector)
         deck.save()
         return redirect('SneakerCards:my_deck')
     return render(request, 'SneakerCards/my_decks.html', {'decks': decks})
 
 
 def view_deck(request, collector_id, deck_id):
-    collector = get_object_or_404(Collector, pk=collector_id)
+    collector = get_object_or_404(Collector, user_id=request.user.id)
     deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
     cards = deck.cards.all()
     if len(cards) == 0:
@@ -162,7 +162,7 @@ def sell_card(request, card_id, deck_id):
     assc_id = throught_model.objects.filter(cards__id=card_id, deck__id=deck_id).values_list('id', flat=True).first()
     print(card_id)
     throught_model.objects.filter(id=assc_id).delete()
-    collector = Collector.objects.get(pk=request.user.id)
+    collector = Collector.objects.get(user_id=request.user.id)
     price = Cards.objects.get(pk=card_id).card_type.saleValue
     collector.credits += price
     collector.save()
@@ -170,7 +170,7 @@ def sell_card(request, card_id, deck_id):
 
 
 def openBooster(request):
-    collector = get_object_or_404(Collector, user=request.user)
+    collector = get_object_or_404(Collector, user_id=request.user.id)
     decks = decks = Deck.objects.filter(collector=collector)
     source = request.GET.get('source')
     cards = []
@@ -220,7 +220,7 @@ def openBooster(request):
 
 def trade_for_credits(request, card_id):
     card = Cards.objects.get(pk=card_id)
-    collector = Collector.objects.get(pk=request.user.id)
+    collector = Collector.objects.get(user_id=request.user.id)
     collector.credits += card.card_type.saleValue
     collector.save()
     return HttpResponse(status=200)
@@ -230,7 +230,7 @@ def add_card_deck(request, card_id, deck_id):
     if request.method == 'POST':
         print("post")
         card = Cards.objects.get(pk=card_id)
-        collector = Collector.objects.get(pk=request.user.id)
+        collector = Collector.objects.get(user_id=request.user.id)
         deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
         deck.cards.add(card)
         deck.save()

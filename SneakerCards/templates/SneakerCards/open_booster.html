@@ -1,0 +1,105 @@
+{% extends "SneakerCards/logged_template.html" %}
+{% block userContent %}
+    {% load static %}
+    <h1>Generated Cards</h1>
+    {% for card in cards %}
+        <div class="deck-grid-container">
+            <figure>
+                <img src="{{ card.image }}/" width="150px" alt="deck-image">
+                <figcaption>{{ card.name }}</figcaption>
+                <form action="{% url 'SneakerCards:trade_for_credits' card.id %}" method="POST" onsubmit="disableButtons(event, this);">
+                    {% csrf_token %}
+                    <input type="hidden" name="card_id" value="{{ card.id }}">
+                    <button type="submit" class="sell-button" id="sell-button-{{ card.id }}">Sell Card</button>
+                </form>
+
+                <form id= 'addCardDeckForm-{{ card.id }}' method="POST" onsubmit="addCardDeck(event, this);">
+                    {% csrf_token %}
+                <select id="deck-select">
+                    {% for deck in decks %}
+                        <option value="{{ deck.id }}">{{ deck.name }}</option>
+                    {% endfor %}
+                </select>
+                    <input type="hidden" id="card_id" value="{{ card.id }}">
+                    <button type="submit" class="add-button" >Add Card</button>
+                </form>
+            </figure>
+        </div>
+    {% endfor %}
+
+    <script>
+    function addCardDeck(event, form2) {
+        const card_id = form2.querySelector('#card_id').value
+        const figure = form2.closest('figure');
+        event.preventDefault();  // Prevent form submission
+        var sellButton = figure.querySelector('.sell-button');
+        var addCardButton = figure.querySelector('.add-button');
+        var select = figure.querySelector('#deck-select');
+        var deck_id = select.value;
+        var actionURL  = "{% url 'SneakerCards:add_card_deck' 1 0 %}";
+        let formAction = actionURL.replace("1", card_id);
+        form2.action = formAction.replace("0", deck_id);
+
+        // Submit the form asynchronously using Fetch API
+        var formData = new FormData(form2);
+
+        fetch(form2.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(function(response) {
+            if (response.ok) {
+                // Handle the successful response
+                // For example, you can display a success message or update the UI
+                alert("Card added to deck");
+                sellButton.disabled = true ;  // Add a CSS class to style the sell button as disabled
+                sellButton.removeEventListener('click', disableButtons);
+                // Remove the sell button click event listener
+                addCardButton.removeEventListener('click', addCardDeck);
+                addCardButton.disabled = true;
+                addCardButton.innerText = 'Added'
+            } else {
+                // Handle any error that occurs during the request
+                alert("Adding card");
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+            alert("error")
+        });
+    }
+
+    function disableButtons(event, form) {
+        event.preventDefault();  // Prevent form submission
+        var figure = form.closest('figure');
+        var sellButton = figure.querySelector('.sell-button');
+        var addCardButtons = figure.querySelectorAll('.add-button');
+
+        // Submit the form asynchronously using Fetch API
+        var formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(function(response) {
+            if (response.ok) {
+                // Handle the successful response
+                // For example, you can display a success message or update the UI
+                sellButton.innerText = 'Sold';  // Update the sell button text
+                sellButton.classList.add('disabled');  // Add a CSS class to style the sell button as disabled
+                sellButton.removeEventListener('click', disableButtons);
+                addCardButtons.forEach(function(addCardButton) {
+                addCardButton.disabled = true;  // Disable the add card button
+                    sellButton.disabled = true;
+        });// Remove the sell button click event listener
+            } else {
+                // Handle any error that occurs during the request
+            }
+        })
+        .catch(function(error) {
+            // Handle any network or other errors
+        });
+    }
+</script>
+
+{% endblock %}

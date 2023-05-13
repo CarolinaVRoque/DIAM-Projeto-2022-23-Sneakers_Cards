@@ -9,43 +9,39 @@
     <link rel="stylesheet" href="{% static 'SneakerCards/css/main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link href="https://fonts.cdnfonts.com/css/lucida-handwriting-std" rel="stylesheet">
-
 </head>
 <div class="grid">
     <header class="page-header">
     </header>
 
-    <nav name="page-leftbar" id="page-leftbar">
+    <nav class="page-leftbar">
         {% csrf_token %}
+
         <form method="get" action="{% url 'SneakerCards:index' %}">
-            <button name="Home" type="submit" class="btn">Home</button>
+            <button type="submit" class="menu-button">Home</button>
         </form>
         <form method="get" action="{% url 'SneakerCards:about' %}">
-            <button name="About" type="submit" class="btn">About</button>
+            <button type="submit" class="menu-button">About</button>
         </form>
         {% if user.is_authenticated %}
             <form method="get" action="{% url 'SneakerCards:dashboard' %}">
-                <button name="Dashboard" type="submit" class="btn">Dashboard</button>
+                <button type="submit" name="Dashboard" class="menu-button">Dashboard</button>
             </form>
             <form method="get" action="{% url 'SneakerCards:view_cards' %}">
-                <button name="SneakerDex" type="submit" class="btn">SneakerDex</button>
+                <button type="submit" name ="SnakerDex" class="menu-button">SneakerDex</button>
             </form>
             <form method="get" action="{% url 'SneakerCards:logout' %}">
-                <button name="Logout" type="submit" class="btn">Logout</button>
+                <button type="submit" name="Logout" class="menu-button">Logout</button>
             </form>
         {% else %}
             <form method="get" action="{% url 'SneakerCards:register' %}">
-                <button name="Register" type="submit" class="btn">Register</button>
+                <button name ="Register" type="submit" class="menu-button">Register</button>
             </form>
             <form method="get" action="{% url 'SneakerCards:login' %}">
-                <button name="Login" type="submit" class="btn">Login</button>
+                <button name ="Login" type="submit" class="menu-button">Login</button>
             </form>
-
         {% endif %}
-        <script src="{% static 'SneakerCards/js/button.js' %}"></script>
     </nav>
-
-
     <main class="page-main">
         {% block content %}
         {% endblock %}
@@ -56,7 +52,7 @@
             <div class="content_footer">
                 <p>Our contacts:</p>
                 <p>E-mail: sneakers_cards@cards.pt</p>
-                <p>Número de Telemóvel: +315 966666666</p>
+                <p>Mobile: +315 966666666</p>
             </div>
             <div class="social-icons">
                 <a href="https://www.instagram.com/seu_perfil_instagram" target="_blank"><i
@@ -68,6 +64,7 @@
             </div>
         </div>
     </footer>
+
 </div>
 
 

@@ -1,27 +1,22 @@
 {% extends "SneakerCards/logged_template.html" %}
-
-{% block content %}
-    <main>
-
+{% block userContent %}
+    {% load static %}
         <div class="credits_info">
             <p>
                 <span> {{ userInfo.get_username }}, you have</span>
-
                     {%if userInfo.collector.credits < 100 %}
                         <span style="color: red">  {{ userInfo.collector.credits }} </span>
                     {% else %}
                         <span style="color: green">  {{ userInfo.collector.credits }} </span>
                     {% endif %}
-
                     <span>credits!</span>
-
             </p>
         </div>
+
         <div class="booster_container">
 
-            {% load static %}
             <div class="booster_option_container">
-                 <a href=""><img src="{% static 'SneakerCards/images/prince_crown.png' %}" alt="Prince Crown Booster" style="width:200px;height:150px;"></a>
+                 <a href="{% url 'SneakerCards:openBooster'%}?source=prince"><img src="{% static 'SneakerCards/images/prince_crown.png' %}" alt="Prince Crown Booster" style="width:200px;height:150px;"></a>
                 <div class="booster_description">
                     <p style="text-align: center"><b>Prince Booster</b></p>
                     <p>Booster with a <b>poor</b> chance to win rare cards</p>
@@ -32,8 +27,9 @@
                     {% endif %}
                 </div>
             </div>
+
             <div class="booster_option_container">
-                 <a href=""><img src="{% static 'SneakerCards/images/monach_crown.png' %}" alt="Monarch Crown Booster" style="width:190px;height:200px;"></a>
+                 <a href="{% url 'SneakerCards:openBooster'%}?source=monarch"><img src="{% static 'SneakerCards/images/monach_crown.png' %}" alt="Monarch Crown Booster" style="width:190px;height:200px;"></a>
                  <div class="booster_description">
                     <p style="text-align: center"><b>Monarch Booster</b></p>
                     <p>Booster with a <b>better</b> chance to win rare cards</p>
@@ -44,8 +40,9 @@
                     {% endif %}
                 </div>
             </div>
+
             <div class="booster_option_container">
-                 <a href=""><img src="{% static 'SneakerCards/images/skull_crown.png' %}" alt="Skull Crown Booster" style="width:225px;height:200px;"></a>
+                 <a href="{% url 'SneakerCards:openBooster'%}?source=king"><img src="{% static 'SneakerCards/images/skull_crown.png' %}" alt="Skull Crown Booster" style="width:225px;height:200px;"></a>
                   <div class="booster_description">
                     <p style="text-align: center"><b>Skull King Booster</b></p>
                     <p>Booster with a <b>good</b> chance to win rare cards</p>
@@ -56,16 +53,11 @@
                     {% endif %}
                 </div>
             </div>
+
             <div class="booster_option_container">
                  <p> win credits</p>
             </div>
         </div>
-
-
-
-
-    </main>
-
 
 {% endblock %}
 

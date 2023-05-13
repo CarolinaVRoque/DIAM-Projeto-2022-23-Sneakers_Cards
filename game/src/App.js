@@ -84,7 +84,7 @@ function App() {
     const resetTurn = () => {
         setChoiceOne(null)
         setChoiceTwo(null)
-        if (!gameEnd){
+        if (credits > 0) {
             setCredits(prevTurns => prevTurns - 10)
         }
 
@@ -122,6 +122,8 @@ function App() {
             'power': user.power,
             'credits': user.credits
         });
+
+         window.location.replace('http://127.0.0.1:8000/SneakerCards/buy_booster');
     }
 
 

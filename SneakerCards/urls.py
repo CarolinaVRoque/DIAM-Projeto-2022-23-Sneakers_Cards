@@ -20,6 +20,8 @@ urlpatterns = [
     path('view_deck/<int:collector_id>/<int:deck_id>', views.view_deck, name='view_deck'),
     path('sell_card/<int:card_id>/<int:deck_id>/', views.sell_card, name='sell_card'),
     path('openBooster', views.openBooster, name='openBooster'),
+    path('trade_for_credits/<int:card_id>/', views.trade_for_credits, name='trade_for_credits'),
+    path('add_card_deck/<int:card_id>/<int:deck_id>/', views.add_card_deck, name='add_card_deck'),
 ]
 
 if settings.DEBUG:

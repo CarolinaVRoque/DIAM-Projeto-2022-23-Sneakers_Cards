@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth import login as auth_login
@@ -9,6 +9,7 @@ from django.contrib.auth import logout as auth_logout
 from SneakerCards.models import Collector, CardType, Cards, Deck
 from django.core import serializers
 from django.core.cache import cache
+import random
 
 
 # Create your views here.
@@ -169,6 +170,68 @@ def sell_card(request, card_id, deck_id):
 
 
 def openBooster(request):
+    collector = get_object_or_404(Collector, user=request.user)
+    decks = decks = Deck.objects.filter(collector=collector)
     source = request.GET.get('source')
-    print(source)
-    return None
+    cards = []
+    multiplier = 1
+
+    if source == 'prince':
+        multiplier = 1
+        collector.credits -= 100
+    elif source == 'monarch':
+        multiplier = 2
+        collector.credits -= 175
+    elif source == 'king':
+        multiplier = 3
+        collector -= 250
+    else:
+        return render(request, 'SneakerCards/buy_booster.html', {'error_message': 'Error. Invalid source'})
+
+    if collector.credits < 0:
+        return render(request, 'SneakerCards/buy_booster.html', {'error_message': 'Insuficient credits'})
+
+    collector.save()
+    card_types = CardType.objects.all()
+    cardtype_probabilities = {}
+    total_probability = 0
+    for card_type in card_types:
+        cardtype_probabilities[card_type.type] = card_type.percentage
+        total_probability += card_type.percentage
+    for card_type, probability in cardtype_probabilities.items():
+        cardtype_probabilities[card_type] = probability / total_probability
+
+    for i in range(0, 5):
+        random_number = random.uniform(0, 1)
+        cumalitve_probability = 0
+        for card_type, probability in cardtype_probabilities.items():
+            # Não sei se é assim que vou controlar os multiplicadores
+            # preciso do Nuno!! xD
+            cumalitve_probability += probability * multiplier
+            if random_number < cumalitve_probability:
+                selected_cardtype = card_type
+                break
+        random_card = Cards.objects.filter(card_type__type=selected_cardtype).order_by('?').first()
+        cards.append(random_card)
+    return render(request, 'SneakerCards/open_booster.html', {'cards': cards, 'decks': decks})
+
+
+def trade_for_credits(request, card_id):
+    card = Cards.objects.get(pk=card_id)
+    collector = Collector.objects.get(pk=request.user.id)
+    collector.credits += card.card_type.saleValue
+    collector.save()
+    return HttpResponse(status=200)
+
+
+def add_card_deck(request, card_id, deck_id):
+    if request.method == 'POST':
+        print("post")
+        card = Cards.objects.get(pk=card_id)
+        collector = Collector.objects.get(pk=request.user.id)
+        deck = get_object_or_404(Deck, pk=deck_id, collector=collector)
+        deck.cards.add(card)
+        deck.save()
+        return HttpResponse(status=200)
+    else:
+        return render(request, 'SneakerCards/open_booster.html')
